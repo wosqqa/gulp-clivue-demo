@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 编码 -->
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- 兼容模式方案：IE以最高级模式渲染文档；使用Chrome Frame渲染。 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari (ios7.0版本以后，safari上已看不到效果) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 (可选default、black、black-translucent) -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- 忽略将页面中的数字识别为电话号码 -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 忽略Android平台中对邮箱地址的识别 -->
+    <meta name="format-detection" content="email=no">
+    <!-- 作者 -->
+    <meta name="author" content="Cleam Lee">
+    <!-- 关键词 -->
+    <meta name="keywords" content="关键词">
+    <!-- 描述信息 -->
+    <meta name="description" content="描述信息">
+    <!-- dns预解析 -->
+    <link rel="dns-prefetch" href="//mini.eastday.com/"/>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="//mini.eastday.com/toutiaoh5/img/favicon.ico"/>
+    <link rel="bookmark" href="//mini.eastday.com/toutiaoh5/img/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon-precomposed" href="//mini.eastday.com/toutiaoh5/img/favicon.ico">
+    <!-- 标题 -->
+    <!-- 动态更新html字体大小（使用rem为单位时） -->
+    <!-- 样式文件 -->
+    <meta name="hotcss" content="design-width=750">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="./static/css/common/base.css">
+    <link rel="stylesheet" href="./static/css/rewardPunch.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>7日打卡抢百万年中奖</title>
+</head>
+<body>
+<div class="box" id="App" >
+	@@include('src/pages/common/header.html')
+    <div class="box_content" v-if="boxType==1">
+        <div class="box-top-txt">距百万年中奖开启</div>
+        <div class="box-top-time">
+            <span>{{timeData.day}}</span>天<span>{{timeData.hour}}</span>小时<span>{{timeData.minute}}</span>分<span>{{timeData.second}}</span>秒
+        </div>
+        <div  class="box-center">
+            <div >
+                    <div class="box-center-title">剩余<span>{{punchData.surplus_times}}次</span>补卡机会 <img @click="dialogShow=true" src="./static/img/punch/tips@2x.png"/> </div>
+                    <div  class="box-center-da">
+                        <div v-for="(value,key,index) in punchData" v-if="index<7">
+                            <img src="./static/images/punch/daka@2x.png" :alt="key" v-if="value==0&&nowdays!=key"/>
+                            <img src="./static/images/punch/qudaka@2x.png" @click="getPunchCard(key,1,index)" v-if="value==0&&nowdays==key"/>
+                            <img src="./static/images/punch/daka@2x.png"  v-if="value==2||value==1"/>
+                            <img src="./static/images/punch/buka@2x.png" @click="getPunchCard(key,value,index)" v-if="value==3"/>
+                            <img src="./static/images/punch/yidaka@2x.png" v-if="value==4"/>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- <div>打卡</div> -->
+    </div>
+    <div class="box_content" v-else>
+            <div class="box-top-tips">2018年6月29日15点抢百万年中奖开启</div>
+            <div  class="box-center-kai" @click="showGolds" v-if="boxType==2" >
+            </div>
+            <div  class="box-center-de"  v-if="boxType==3" >
+                <div class="center-de-bi">{{golds}} <span style="display: block;font-size: 0.6rem">金币</span></div>
+            </div>
+            <div  class="box-center-de"  v-if="boxType==4" >
+                <div class="center-de-bi">{{golds}} <span style="display: block;font-size: 0.6rem">金币</span></div>
+            </div>
+            <div  class="box-center-de"  v-if="boxType==5" >
+                <div class="center-de-bi"><span style="display: block;font-size: 0.7rem;padding-top: 0.5rem;">单笔最高300元</span></div>
+            </div>
+            <div class="box-center-xuan"  @click="shareWithWebdata" v-if="boxType<4" ></div>
+            <div class="box-center-down"  @click="downLoadingApp" v-else></div>
+    </div>
+    <div class="dialog_right" @click="dialogShow=true" ></div>
+    <div class="dialog" v-if = "dialogShow">
+            <div class="dialog-overlay"></div>
+            <div class="dialog-content">
+                    <div class="dialog-btn-close" @click="dialogShow=false"></div>
+                    <div class="dialog-content-title">活动规则</div>
+                    <div  class="dialog-content-li">
+                        <div>1、<span class="li-text">活动时间：2018年6月20日-6月30日。</span> </div> 
+                        <div>2、<span class="li-text">活动期间，连续<span class="li-red">7天</span> 成功打卡，即可获得<span class="li-red">金币</span>，瓜分百万年中奖。</span></div> 
+                        <div>3、<span class="li-text">打卡：打卡分享被好友点击阅读，算做一次有效打卡。</span></div> 
+                        <div>4、<span class="li-text">补卡：活动期间，每收取1名徒儿且徒儿进贡满<span class="li-red">60金币</span>，即可获得1次补卡机会。</span></div> 
+                        <div>5、<span class="li-text">打卡状态每2小时更新1次。</span></div> 
+                        <div>6、<span class="li-text">本活动最终解释权归东方头条所有，与Apple Inc无关。</span></div> 
+                    </div>
+            </div>
+    </div>
+</div>
+<script src="./static/js/rewardPunch.js"></script>
+</body>
+</html>
