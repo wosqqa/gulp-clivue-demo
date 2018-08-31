@@ -1,0 +1,364 @@
+@charset "UTF-8";
+@import "common/reset";
+@import "tools/variable";
+@import "tools/mixins";
+
+.box-container{
+  width: 750px;
+  height: 300px;
+  .box-a{
+    width: 750px;
+    height: 420px;
+    @include brdb-img('../images/invite/banner_bg.png',100%);
+    text-align: center;
+    .box-aa{
+      font-size: 60px;
+      font-weight: 500;
+      margin-top: 50px;
+      line-height: 10px;
+      color: $white;
+      line-height: 75px;
+      .box-aaa{
+        font-size: 72px;
+        .box-aab{
+          color: $ft-txt-je;
+        }
+      }
+    }
+    .box-ab{
+      width: 366px;
+      height: 88px;
+      line-height: 88px;
+      background-color: $bg-btn-ljfx;
+      font-size: 36px;
+      color: $ft-btn-ljfx;
+      border-radius: 60px;
+      margin: 25px auto;
+    }
+    .box-ac{
+      color: $white;
+      font-size: 32px;
+      letter-spacing: 1.2px;
+      margin: 0px auto;
+    }
+  }
+  .box-b{
+    .box-ba{
+      @include flexrnsa();
+      height: 100px;
+      line-height: 100px;
+      font-size: 32px;
+      border: 1px solid $br-tb;
+      .box-baa{
+        position: relative;
+      }
+      .box-baa-active{
+        color: $br-btb;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 25%;
+          margin-left: 5px;
+          border-radius: 50px;
+          width: 54px;
+          height: 2px;
+          background: $br-btb;
+        }
+      }
+    }
+    .box-bb{
+      margin-bottom: 110px;
+      .box-bba{
+        font-size:34px;
+        color: $black;
+        font-weight: 500;
+        margin: 38px auto 20px;
+        text-align: center;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 60px;
+          margin-right: 10px;
+          @include brdb-img('../images/invite/left.png','contain');
+          background-position: center;
+          width: 50px;
+          height: 40px;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          right: 50px;
+          margin-right: 10px;
+          @include brdb-img('../images/invite/left.png','contain');
+          background-position: center;
+          width: 50px;
+          height: 40px;
+        }
+      }
+      .box-bbb{
+        color: $nine;
+        font-size: 28px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .box-bbc{
+        @include flexrwsa();
+        padding: 15px 15px 0px;
+        .box-bbca{
+          width: 142px;
+          height: 153px;
+          margin: 15px;
+          padding: 5px;
+          border: 1px solid $br-btf;
+          border-radius: 10px;
+          text-align: center;
+          .box-bbcaa{
+            @include brdb-img('../images/invite/datebg.png','contain');
+            width: 106px;
+            height: 40px;
+            line-height: 40px;
+            color: $white;
+            margin-top: 20px;
+          }
+          .box-bbcab{
+            @include flexrnsa();
+            margin: 15px 8px;
+            .box-bbcaba{
+              width: 30px;
+              margin-right: 5px;
+            }
+            .box-bbcabb{
+              width: 100px;
+              height: 55px;
+              line-height: 55px;
+              color: $ft-btn-ljfx;
+              font-weight: 500;
+              font-size: 30px;
+            }
+          }
+        }
+        .box-bbcb{
+          width: 142px;
+          height: 153px;
+          margin: 15px;
+          padding: 5px;
+          border-radius: 10px;
+          text-align: center;
+        }
+      }
+      .box-bbc-two{
+        @include flexrwfs();
+      }
+      .box-bbd{
+        .box-bba{
+          &::before {
+            left: 190px;
+          }
+          &::after {
+            right: 190px;
+          }
+        }
+        .box-bbda{
+          .box-bbdaa{
+            @include flexrwfs();
+            .box-bbdaaa{
+              height: 30px;
+              line-height: 30px;
+              width: 30px;
+              color: $white;
+              font-size: 26px;
+              text-align: center;
+              background-color: $ft-btn-ljfx;
+              border-radius: 50px;
+              margin: 10px 0;
+            }
+            div{
+              height: 50px;
+              line-height: 50px;
+              margin-left: 15px;
+            }
+          }
+          margin: 30px 25px;
+          color: $black;
+          font-size: 28px;
+        }
+      }
+      .box-bbe{
+        width: 750px;
+        height: 110px;
+        box-sizing: border-box;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        border-top: 1px solid $br-ddd;
+        background-color:$white;
+        .box-bbea{
+          width: 690px;
+          height: 90px;
+          line-height: 90px;
+          text-align: center;
+          color: $white;
+          font-size: 32px;
+          margin: 10px 30px;
+          background-position: center;
+          @include brdb-img('../images/invite/yaoqing.png','contain');
+        }
+      }
+    }
+    .box-bc{
+      .box-bca{
+        position: relative;
+        font-size: 30px;
+        color: $black;
+        height: 90px;
+        line-height: 90px;
+        padding-left: 50px;
+        margin: 0 30px;
+        border-bottom: 1px solid $br-tb;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 28px;
+          left: 0px;
+          @include brdb-img('../images/invite/yqr.png','contain');
+          background-position: center;
+          width: 36px;
+          height: 36px;
+          line-height: 90px;
+        }
+      }
+      .box-bcbt{
+        &::before {
+          @include brdb-img('../images/invite/user.png','contain');
+        }  
+      }
+      .box-bcb{
+        @include flexrnsb();
+        height: 130px;
+        line-height: 130px;
+        margin: 0 30px;
+        border-bottom: 1px solid $br-tb;
+        .box-bcba{
+          margin-right: 20px;
+          line-height: 130px;
+          border-radius: 50px;
+          img{
+            height: 80px;
+            width: 80px;
+          }
+        }
+        .box-bcbb{
+          width: 420px;
+          height: 130px;
+          font-size: 30px;
+          color: $black;
+          line-height: 130px;
+        }
+        .box-bcbc{
+          width: 180px;
+          height: 130px;
+          line-height: 130px;
+          .box-bcbca{
+            position: relative;
+            font-size: 24px;
+            color: $ft-btn-ljfx;
+            padding-right: 36px;
+            text-align: right;
+            // &::before {
+            //   content: "";
+            //   position: absolute;
+            //   top: 50px;
+            //   right: 0px;
+            //   @include brdb-img('../images/invite/jinbi.png','contain');
+            //   background-position: center;
+            //   width: 28px;
+            //   height: 28px;
+            // }
+          }
+          .box-bcbcb{
+            width: 136px;
+            height: 50px;
+            line-height: 50px;
+            margin: 40px 0;
+            font-size: 24px;
+            text-align: center;
+            font-weight: 500;
+            color: $ft-btn-ljfx;
+            border-radius: 50px;
+            margin-left: 40px;
+            border: 1px solid $ft-btn-ljfx;
+          }
+          .box-bcbcd{
+            height: 130px;
+            line-height: 40px;
+            text-align: right;
+            padding: 35px 0;
+            position: relative;
+            span{
+              font-size: 24px;
+              color: $nine; 
+            }
+            .box-bcbcdd{
+              font-size: 34px;
+              color: $ft-btn-ljfx;
+              padding-right: 36px;
+            }
+            // &::before {
+            //   content: "";
+            //   position: absolute;
+            //   top: 40px;
+            //   right: 0px;
+            //   @include brdb-img('../images/invite/jinbi.png','contain');
+            //   background-position: center;
+            //   width: 28px;
+            //   height: 28px;
+            // }
+          }
+        }
+        .box-bcbe{
+          position: relative;
+          .box-bcbg{
+            width: 690px;
+            height: 88px;
+            padding-left: 90px;
+            background-color: $bg-f4;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-size: 30px;
+            color: $ft-txt-bb;
+          }
+          .box-bcbf{
+            width: 224px;
+            height: 72px;
+            position: absolute;
+            right: 10px;
+            top: 0;
+            line-height: 72px;
+            background-color: $br-btb;
+            border-radius: 50px;
+            margin: 29px 0;
+            color: $white;
+            font-size: 30px;
+            text-align: center;
+          }
+        }
+      }
+      .box-bcbn{
+        padding: 135px 0;
+        font-size: 30px;
+        text-align: center;
+        color: $ft-txt-bb;
+      }
+    }
+    padding-bottom: 50px;
+  }
+  .box-bhr{
+    width: 750px;
+    height: 16px;
+    background-color:$bg-f4; 
+  }
+}

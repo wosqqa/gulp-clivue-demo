@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 编码 -->
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- 兼容模式方案：IE以最高级模式渲染文档；使用Chrome Frame渲染。 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+    <!-- 当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari (ios7.0版本以后，safari上已看不到效果) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式 (可选default、black、black-translucent) -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- 忽略将页面中的数字识别为电话号码 -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 忽略Android平台中对邮箱地址的识别 -->
+    <meta name="format-detection" content="email=no">
+    <!-- 作者 -->
+    <meta name="author" content="Cleam Lee">
+    <!-- 关键词 -->
+    <meta name="keywords" content="关键词">
+    <!-- 描述信息 -->
+    <meta name="description" content="描述信息">
+    <!-- dns预解析 -->
+    <link rel="dns-prefetch" href="//mini.eastday.com/"/>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="//mini.eastday.com/toutiaoh5/img/favicon.ico"/>
+    <link rel="bookmark" href="//mini.eastday.com/toutiaoh5/img/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon-precomposed" href="//mini.eastday.com/toutiaoh5/img/favicon.ico">
+    <!-- 标题 -->
+    <!-- 动态更新html字体大小（使用rem为单位时） -->
+    <!-- 样式文件 -->
+    <meta name="hotcss" content="design-width=750">
+    <link rel="stylesheet" href="./static/css/invite.css">
+    <script src="./static/js/lib/vue.min.js"></script>
+    <script src="./static/js/common/base.js"></script>
+    <script src="./static/js/lib/global.js"></script>
+    <script src="./static/js/fontType/invite.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script> -->
+    <title>邀請好友</title>
+</head>
+<body>
+<div class="box" id="App" >
+            <div class="box-container" v-cloak>
+                <div class="box-a" >
+                        <div class="box-aa" >
+                            <span v-text="fontText.txt_aa1"></span><br/><span class="box-aaa" v-text="fontText.txt_aa2"><span class="box-aab" v-text="fontText.txt_aa3"></span></span>
+                        </div>
+                        <div class="box-ab" @click='shareInviteFriends(111)' v-text="fontText.txt_ab1">
+                        </div>
+                        <div class="box-ac" @click='copyInviteCode' >
+                            <span v-text="fontText.txt_ac1"></span><span v-text="inviteCode"></span><span v-text="fontText.txt_ac2"></span>
+                        </div>
+                </div>
+                <div class="box-b">
+                        <div class="box-ba">
+                            <div  :class="navActive=='1' ? 'box-baa box-baa-active' : 'box-baa'" @click="clickTab(1)" v-text="fontText.txt_ba1"></div>
+                            <div  :class="navActive=='2' ? 'box-baa box-baa-active' : 'box-baa'" @click="clickTab(2)" v-text="fontText.txt_ba2"></div>
+                        </div>
+                        <div class="box-bb" v-show="navActive=='1'">
+                                <div class="box-bba" v-text="fontText.txt_bba1">
+                                </div>
+                                <div class="box-bbb" v-text="fontText.txt_bba2">
+                                </div>
+                                <div class="box-bbc">
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa1"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb1"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa2"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb2"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa3"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb3"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa"  v-text="fontText.txt_bbcaa4"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba"  v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb"  v-text="fontText.txt_bbcabb4"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa5"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb5"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa6"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb6"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbca">
+                                                <div class="box-bbcaa" v-text="fontText.txt_bbcaa7"></div>
+                                                <div class="box-bbcab">
+                                                        <div class="box-bbcaba" v-text="fontText.txt_bbcab"></div>
+                                                        <div class="box-bbcabb" v-text="fontText.txt_bbcabb7"></div>
+                                                </div>
+                                        </div>
+                                        <div class="box-bbcb">
+
+                                        </div>
+                                </div>
+                                <div class="box-bhr">
+                                </div>
+                                <div class="box-bbd">
+                                        <div class="box-bba" v-text="fontText.txt_bba3">
+                                            
+                                        </div>
+                                        <div class="box-bbb" v-text="fontText.txt_bba4">
+                                            
+                                        </div>
+                                        <div class="box-bbda">
+                                                <div  class="box-bbdaa"><div  class="box-bbdaaa">1</div><div v-text="fontText.txt_bbdaa1"></div></div>
+                                                <div  class="box-bbdaa"><div  class="box-bbdaaa">2</div><div v-text="fontText.txt_bbdaa2"></div></div>
+                                                <div  class="box-bbdaa"><div  class="box-bbdaaa">3</div><div v-text="fontText.txt_bbdaa3"></div></div>
+                                                <div  class="box-bbdaa"><div  class="box-bbdaaa">4</div><div v-text="fontText.txt_bbdaa4"></div></div>
+                                        </div>
+                                 </div>
+                                 <div class="box-bbe">
+                                        <div class="box-bbea" @click='shareInviteFriends(112)' v-text="fontText.txt_share">
+                                            
+                                        </div>
+                                 </div>
+                        </div>
+                        <div class="box-bc" v-show="navActive=='2'">
+                                    <div class="box-bca" v-text="fontText.txt_bca">
+                                    </div>
+                                    <div class="box-bcb" style="border: 0px" v-if="master!=''">
+                                            <div class="box-bcba">
+                                                <img :src="master.headpic" alt="" v-if="master.headpic=='' || master.headpic =='null'">
+                                                <img src="http://resources.dftoutiao.com/songheng/DFTT/default/img/dftt00000.png" v-else alt="">
+                                            </div>
+                                            <div class="box-bcbb" v-text="master.nickname">
+                                            </div>
+                                            <div class="box-bcbc">
+                                                <!-- <div class="box-bcbcd"><div class="box-bcbcdd" v-text=" '+'+ master.totalbonus"></div><span v-text="fontText.txt_bcbcdd"></span></div> -->
+                                            </div>
+                                    </div>
+                                    <div class="box-bcb" style="border: 0px" v-if="master == ''">
+                                        <div class="box-bcbe"><input type="text" :placeholder="fontText.txt_bcbe" class="box-bcbg" v-model='masterCode'><span class="box-bcbf" @click='addInviteCode' v-text="fontText.txt_bcbf"></span></div>
+                                    </div>
+                                    <div class="box-bhr">
+                                    </div>
+
+                                <div class="box-bca box-bcbt" >
+                                    <span v-text="fontText.txt_bcbt"></span><span v-text="'('+tuerlist.length+')'"></span>
+                                </div>
+                                <template v-for="item in tuerlist">
+                                    <div class="box-bcb">
+                                            <div class="box-bcba">
+                                                <img :src="item.headpic" alt="" v-if="item.headpic=='' || item.headpic =='null'">
+                                                <img src="http://resources.dftoutiao.com/songheng/DFTT/default/img/dftt00000.png" v-else alt="">
+                                            </div>
+                                            <div class="box-bcbb" v-text="item.nickname">
+                                            </div>
+                                            <div class="box-bcbc">
+                                                <div class="box-bcbca" > 已完成<span v-text="item.assetNum"></span>次
+                                                </div>
+                                            </div>
+                                    </div>
+                                </template>
+                                <div class="box-bcbn" v-if="tuerlist.length == 0" v-text="fontText.txt_bcbn">
+                                </div>
+                        </div>
+                </div>
+            </div>
+</div>
+<script src="./static/js/invite.js"></script>
+</body>
+</html>

@@ -1,5 +1,13 @@
-
-console.log(12314);
-console.log(534)
-console.log(534213214);
-console.log('fanmin问问')
+var app = new Vue({
+    el: '#App',
+    data: {
+        accid:0
+    },
+    created(){
+    },
+    mounted() {
+        let scope = this;
+    },
+    methods: {
+    }
+})

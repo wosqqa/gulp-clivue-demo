@@ -71,3 +71,72 @@ $legacy-support-for-ie: true !default;
     border-left: $value solid $color;
     border-bottom: $value solid transparent;
 }
+
+@mixin font($val){
+	line-height: $val;
+	height: $val;
+	font-size: $val;
+  }
+  @mixin back-img($url){
+	@media only screen and (min-width: 150px) {
+	  background-image: url($url + '@2x.png');
+	}
+	@media only screen and (min-width: 376px) {
+	  background-image: url($url + '@3x.png');
+	}
+  }
+	@mixin brdb-img($url,$size){
+		background-image: url($url);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-size: $size;
+	}
+
+  @mixin flexrnsa(){
+	display:  flex;
+	flex-flow: row nowrap;
+	justify-content:  space-around;
+  }
+
+	@mixin flexrnsb(){
+		display:  flex;
+		flex-flow: row nowrap;
+		justify-content:  space-between;
+	}
+
+  @mixin flexrwsa(){
+	display:  flex;
+	flex-flow: row wrap;
+	justify-content:  space-around;
+	}
+	
+
+	@mixin flexrwfs(){
+		display:  flex;
+		flex-flow: row wrap;
+		justify-content:  flex-start;
+	}
+  
+  @mixin flexcnsa(){
+	display:  flex;
+	flex-flow: column nowrap;
+	justify-content:  space-around;
+  }
+  
+  @mixin flexcwsa(){
+	display:  flex;
+	flex-flow: column wrap;
+	justify-content:  space-around;
+  }
+	
+		
+  @mixin bgnrcbc($val,$src){
+	@include back-img($src);
+	background-repeat: no-repeat;
+	position: relative;
+	display: inline-block;
+	background-size: cover;
+	width: $val;
+	height: $val;
+  }
+  

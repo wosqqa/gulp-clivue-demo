@@ -30,6 +30,90 @@
 	<img src="images/twitter.png" alt="">
 
     <script type="text/javascript" src="js/index.js"></script>
-
+	<div  class="rentice_box1">
+            <div class="box1-tez" ></div>
+            <div  class="box1-btn" @click="openPopup(true)"></div>
+            <div  class="box1-yqm"  @click="copyClipboard" >邀请码{{replaceInvite(urlParam.accid)}}  (点击可复制)</div>
+            <div  class="box1-right" :style="invitefriends.marquee_copy!=null? 'top: 2.5rem;':''" @click="openRenticeDialog">奖励规则</div>
+        </div>
+        <div  class="rentice_box2" id='renticeBox2' style="background-color: #ffffff;">
+                <div class="list-container">
+                        <div class="list-container-box1">
+                            <div :class="navActive=='1' ? 'am-popover am-active' : 'am-popover'" @click="clickTab(1)">
+                                <div class="am-popover-inner">邀请奖励</div>
+                            </div>
+                            <div :class="navActive=='2' ? 'am-popover am-active' : 'am-popover'"  @click="clickTab(2)">
+                                <div class="am-popover-re" v-if="myParam.activity.length!= activeLength">热</div>
+                                <div class="am-popover-inner">最新活动</div>
+                            </div>
+                        </div>
+                        <div class="list-container-box2">
+                            <div class="list-box3-luck"   v-show="navActive=='1'">
+                                <div class="list-title" >每邀请1名好友，即可获<span>10元</span>现金奖励</div>
+                                <div class="list-subtitle" >好友通过阅读获得20金币奖励，您即可拿到当日现金奖励</div>
+                                <div class="list-conter">
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第一天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[0] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第二天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[1] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第三天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[2] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第四天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[3] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                </div>
+                                <div class="list-conter list-conter-two">
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第五天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[4] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第六天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[5] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box">
+                                      <div class="list-conter-day">第七天</div>
+                                      <div  class="list-conter-txt"><span class="list-conter-dayD">获得</span><span class="list-conter-dayE"><span>{{myParam.money[6] | numFilter2}}</span>元</span></div>
+                                    </div>
+                                    <div class="list-conter-box" style="border: 0px solid #e8e8e8;">
+                                    </div>
+                                </div>
+                                <div class="list-ling" >
+                                  <!-- 当前待领取的现金奖励：<span>￥58.56</span> -->
+                                  </div>
+                                <div class="list-title" >如何提升邀请成功率？</div>
+                                <div class="list-subtitle" >最高可提高成功率200%以上</div>
+                                <div class="list-li" ><div  class="list-li-title">1</div><div>邀请您的家人、朋友、同学、同事成功率最高。</div> </div>
+                                <div class="list-li" ><div  class="list-li-title">2</div><div>同时分享到3个以上微信群/QQ群，成功率提升<span class="list-li-red">200%</span>以上。</div> </div>
+                                <div class="list-li" ><div  class="list-li-title">3</div><div>可以告诉您的朋友：在注册后可收到奖励，通过任务和阅读都可以产生现金奖励，并可以提现。</div></div>
+                                
+                                <div class="list-li" v-if="!isCopy">
+                                  <div class="list-li-share">
+                                    <div class="list-title" >复制以下文案分享给好友</div>
+                                      <textarea class="list-li-are"  style="-webkit-user-select: auto;" contenteditable="true" v-model="myParam.invite_share_template"></textarea>
+                                  </div> 
+                                </div>
+                  
+                            </div>
+                            <div class="list-box3-obtained" id="list-box3-roll-1"  v-show="navActive=='2'">
+                                              <div class="list-box3-roll" v-show="myParam.activity.length>0" >
+                                                  <div class="list-txt">{{myParam.activity.length}}个活动进行中...</div>
+                                  <div class="list-hd">
+                                      <div v-for="(item,index) in myParam.activity" :key="index" @click="lookActivity(item.activity_url)" ><img :src="item.activity_img"></div>
+                                  </div>
+                                              </div>
+                                <div class="list-txtNo"  v-show="myParam.activity.length==0">关注更多活动拿奖励~</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+        </div>
 </body>
 </html>

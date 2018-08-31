@@ -36,7 +36,7 @@ const moveFile = {
 const config = {
     cssSrc: ['src/scss/**/*.scss'],
     cssDist: dist + '/static/css',
-    jsSrc: ['src/js/**/*.js', '!src/js/**/*.min.js','!src/js/common/*.js'],
+    jsSrc: ['src/js/**/*.js', '!src/js/lib/*.js', '!src/js/common/*.js'],
     jsDist: dist + '/static/js',
     imgSrc: 'src/images/**/*',
     imgDist: dist + '/static/images',
@@ -98,9 +98,9 @@ gulp.task('scss', () => {
     		// 才能找出哪些文件是被修改过的
     		.pipe(changed(config.cssDist, {hasChanged: changed.compareSha1Digest}))
     		// 只有被更改过的文件才会通过这里
-	        .pipe(sourcemaps.init())
+	        // .pipe(gulpif(!isProd, sourcemaps.init()))
 	        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-	        .pipe(sourcemaps.write())
+	        // .pipe(gulpif(!isProd, sourcemaps.write()))
 	        .pipe(autoprefixer({
 	            browsers: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
 	            cascade: false
@@ -121,23 +121,37 @@ gulp.task('scss', () => {
 gulp.task('concatBaseJs', function () {
 	return gulp.src(['src/js/common/*.js'])
 	.pipe(changed(dist + '/static/js/common', {hasChanged: changed.compareSha1Digest}))
-	.pipe(sourcemaps.init())
+	.pipe(babel({  //转换成 ES5
+        presets: ['es2015']  
+    }))
+	// .pipe(gulpif(!isProd, sourcemaps.init()))
 	.pipe(babel({
 		presets: ['env']
 	}))
 	.pipe(ugLify())
-	.pipe(sourcemaps.write())
+	// .pipe(gulpif(!isProd, sourcemaps.write()))
 	.pipe(remember('js-task'))
 	.pipe(concat('base.js'))
 	.pipe(gulp.dest(dist + '/static/js/common'))
 	.pipe(browserSync.reload({stream: true}));
   });
+//js复制lib
+gulp.task('jsLib', () => {
+	return gulp.src(['src/js/lib/*.js'])
+		.pipe(changed(dist + '/static/js/lib', {hasChanged: changed.compareSha1Digest}))
+		// .pipe(sourcemaps.write('./',{addComment: false}))
+		.pipe(gulp.dest(dist + '/static/js/lib'))
+		.pipe(browserSync.reload({stream: true}));
+});
 
 //js压缩混淆
 gulp.task('js', () => {
 	return gulp.src(config.jsSrc)
 		.pipe(changed(config.jsDist, {hasChanged: changed.compareSha1Digest}))
-		.pipe(sourcemaps.init())
+		.pipe(babel({  //转换成 ES5
+			presets: ['es2015']  
+		}))
+		// .pipe(sourcemaps.init())
 		//注释jshint相关代码
 		// .pipe(jshint({
 		//     esnext: true
@@ -147,7 +161,7 @@ gulp.task('js', () => {
 		    presets: ['env']
 		}))
 		.pipe(ugLify())
-		.pipe(sourcemaps.write())
+		// .pipe(sourcemaps.write('./',{addComment: false}))
 		.pipe(gulp.dest(config.jsDist))
 		.pipe(browserSync.reload({stream: true}));
 });
@@ -209,6 +223,7 @@ gulp.task('runSequence', (done) => {
 		['css'],
 		['sprites'],
 		['js'],
+		['jsLib'],
 		['concatBaseJs'],
 		['fonts'],
 		['move'],
@@ -225,6 +240,7 @@ gulp.task('build', (done) => {
 		['css'],
 		['sprites'],
 		['js'],
+		['jsLib'],
 		['concatBaseJs'],
 		['fonts'],
 		['move'],
@@ -243,10 +259,10 @@ gulp.task('dev', ['runSequence'], function() {
             index: "index.html"
         }
     });
-
     gulp.watch(config.cssSrc, ['scss']);
 	gulp.watch(config.jsSrc, ['js']);
 	gulp.watch('src/js/common/*.js', ['concatBaseJs']);
+	gulp.watch('src/js/lib/*.js', ['jsLib']);
     gulp.watch('src/**/*.html', ['html']);
     gulp.watch('src/css/**/*.css', ['css']);
     gulp.watch(config.imgSrc, ['images']);
